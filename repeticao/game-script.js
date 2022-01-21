@@ -199,7 +199,7 @@ function removeChildElementsByTag(parent, tag) {
 
 function novaImgBlocoLogico(arrayPecasExistentes) {
 	var novaImg = document.createElement("img");
-	var i, tipo, cor, tam, cont, arq, opcaoVariar, corTemp, tipoTemp, tamtemp, contTemp, aux;
+	var i, tipo, cor, tam, cont, arq, opcaoVariar, tipoTemp, corTemp, tamTemp, contTemp, num;
 	const formas = [0, 1, 2, 3]; //Triângulo, Quadrado, Retângulo, Círculo
 	const cores = [0, 1, 2]; //Azul, Vermelho, Amarelo
 	const tamanho = [0, 1]; //Grande, Pequeno
@@ -217,14 +217,24 @@ function novaImgBlocoLogico(arrayPecasExistentes) {
 					cor = arrayPecasExistentes.at(-1).getAttribute('cor');
 					tam = arrayPecasExistentes.at(-1).getAttribute('tam');
 					cont = arrayPecasExistentes.at(-1).getAttribute('cont');
-					while (1) {
-						tipoTemp = getRandomIntInclusive(0, 3);
-						if (tipo != tipoTemp) {
+					var ehNovo = 0;
+					while (!ehNovo) {
+						num = getRandomIntInclusive(0, 3);
+						if (tipo != num) {
+							ehNovo = 1;
 							for (var j = 0; j < arrayPecasExistentes.length; j++) {
-
-                            }
-                        }
-                    }
+								tipoTemp = arrayPecasExistentes[j].getAttribute('tipo');
+								corTemp = arrayPecasExistentes[j].getAttribute('cor');
+								tamTemp = arrayPecasExistentes[j].getAttribute('tam');
+								contTemp = arrayPecasExistentes[j].getAttribute('cont');
+								if (num == tipoTemp && cor == corTemp && tam == tamTemp && cont == contTemp) {
+									ehNovo = 0;
+								}
+							}
+						}
+					}
+					tipo = num;
+					break;
             }
         }
 	} else {
