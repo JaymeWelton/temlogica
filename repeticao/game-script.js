@@ -209,7 +209,7 @@ function novaImgBlocoLogico(arrayPecasExistentes) {
 		for (i = 0; i < arrayPecasExistentes.length; i++) {
 			if (arrayPecasExistentes[i] == null)
 				continue;
-			opcaoVariar = getRandomIntInclusive(0, 3);
+			opcaoVariar = getRandomIntInclusive(0, 3); //Variável que vai escolher qual característica variar...
 			//0: Formas, 1: cores, 2: tamanho, 3: borda
 			switch (opcaoVariar) {
 				case 0:
@@ -219,16 +219,16 @@ function novaImgBlocoLogico(arrayPecasExistentes) {
 					cont = arrayPecasExistentes.at(-1).getAttribute('cont');
 					var ehNovo = 0;
 					while (!ehNovo) {
-						num = getRandomIntInclusive(0, 3);
+						num = getRandomIntInclusive(0, 3); //Escolhe uma forma, se a forma já existe, ele não avança pro if
 						if (tipo != num) {
 							ehNovo = 1;
-							for (var j = 0; j < arrayPecasExistentes.length; j++) {
+							for (var j = 0; j < arrayPecasExistentes.length; j++) { //Percorre o array de peças tentnado encontrar se a combinação já existe
 								tipoTemp = arrayPecasExistentes[j].getAttribute('tipo');
 								corTemp = arrayPecasExistentes[j].getAttribute('cor');
 								tamTemp = arrayPecasExistentes[j].getAttribute('tam');
 								contTemp = arrayPecasExistentes[j].getAttribute('cont');
 								if (num == tipoTemp && cor == corTemp && tam == tamTemp && cont == contTemp) {
-									ehNovo = 0;
+									ehNovo = 0; //Se cair aqui, é porque a combinação já existe e volta pro começo do while e sorteia uma nova forma
 								}
 							}
 						}
