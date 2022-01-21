@@ -200,10 +200,10 @@ function removeChildElementsByTag(parent, tag) {
 function novaImgBlocoLogico(arrayPecasExistentes) {
 	var novaImg = document.createElement("img");
 	var i, tipo, cor, tam, cont, arq, opcaoVariar, tipoTemp, corTemp, tamTemp, contTemp, num;
-	const formas = [0, 1, 2, 3]; //Triângulo, Quadrado, Retângulo, Círculo
-	const cores = [0, 1, 2]; //Azul, Vermelho, Amarelo
-	const tamanho = [0, 1]; //Grande, Pequeno
-	const borda = [0, 1]; //Com_borda, Sem_borda
+	//Formas: Triângulo: 0, Quadrado: 1, Retângulo: 2, Círculo: 3
+	//Cores: Azul: 0, Vermelho: 1, Amarelo; 2
+	//Tamanho: Grande: 0, Pequeno: 1
+	//Borda: Com_borda: 0, Sem_borda: 1
 
 	if (arrayPecasExistentes.length != 0) {
 		for (i = 0; i < arrayPecasExistentes.length; i++) {
