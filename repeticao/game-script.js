@@ -200,41 +200,98 @@ function removeChildElementsByTag(parent, tag) {
 function novaImgBlocoLogico(arrayPecasExistentes) {
 	var novaImg = document.createElement("img");
 	var i, tipo, cor, tam, cont, arq, opcaoVariar, tipoTemp, corTemp, tamTemp, contTemp, num;
-	//Formas: Triângulo: 0, Quadrado: 1, Retângulo: 2, Círculo: 3
-	//Cores: Azul: 0, Vermelho: 1, Amarelo; 2
-	//Tamanho: Grande: 0, Pequeno: 1
-	//Borda: Com_borda: 0, Sem_borda: 1
-
+	/*
+	 * Formas: Triângulo: 0, Quadrado: 1, Retângulo: 2, Círculo: 3
+	 * Cores: Azul: 0, Vermelho: 1, Amarelo; 2
+	 * Tamanho: Grande: 0, Pequeno: 1
+	 * Borda: Com_borda: 0, Sem_borda: 1
+	 */
 	if (arrayPecasExistentes.length != 0) {
 		for (i = 0; i < arrayPecasExistentes.length; i++) {
 			if (arrayPecasExistentes[i] == null)
 				continue;
-			opcaoVariar = getRandomIntInclusive(0, 3); //Variável que vai escolher qual característica variar...
-			//0: Formas, 1: cores, 2: tamanho, 3: borda
-			switch (opcaoVariar) {
-				case 0:
-					tipo = arrayPecasExistentes.at(-1).getAttribute('tipo'); //Pega o atributo 'tipo' do último elemento dentro do array
-					cor = arrayPecasExistentes.at(-1).getAttribute('cor');
-					tam = arrayPecasExistentes.at(-1).getAttribute('tam');
-					cont = arrayPecasExistentes.at(-1).getAttribute('cont');
-					var ehNovo = 0;
-					while (!ehNovo) {
+			var ehNovo = 0;
+			while (!ehNovo) {
+				tipo = arrayPecasExistentes.at(-1).getAttribute('tipo'); //Pega o atributo 'tipo' do último elemento dentro do array
+				cor = arrayPecasExistentes.at(-1).getAttribute('cor');
+				tam = arrayPecasExistentes.at(-1).getAttribute('tam');
+				cont = arrayPecasExistentes.at(-1).getAttribute('cont');
+				opcaoVariar = getRandomIntInclusive(0, 3); //Variável que vai escolher qual característica variar...
+				//0: Formas, 1: cores, 2: tamanho, 3: borda
+				switch (opcaoVariar) {
+					case 0:
 						num = getRandomIntInclusive(0, 3); //Escolhe uma forma, se a forma já existe, ele não avança pro if
 						if (tipo != num) {
 							ehNovo = 1;
-							for (var j = 0; j < arrayPecasExistentes.length; j++) { //Percorre o array de peças tentnado encontrar se a combinação já existe
+							for (var j = 0; j < arrayPecasExistentes.length; j++) { //Percorre o array de peças tentando encontrar se a combinação já existe
 								tipoTemp = arrayPecasExistentes[j].getAttribute('tipo');
 								corTemp = arrayPecasExistentes[j].getAttribute('cor');
 								tamTemp = arrayPecasExistentes[j].getAttribute('tam');
 								contTemp = arrayPecasExistentes[j].getAttribute('cont');
 								if (num == tipoTemp && cor == corTemp && tam == tamTemp && cont == contTemp) {
 									ehNovo = 0; //Se cair aqui, é porque a combinação já existe e volta pro começo do while e sorteia uma nova forma
-								}
+									break;
+								} else if (j == arrayPecasExistentes.length - 1) { //Caso tenha chagado ao final da lista e não encontrou nenhumaa combnação idêntica
+									tipo = num;
+                                }
 							}
 						}
-					}
-					tipo = num;
-					break;
+						break;
+					case 1:
+						num = getRandomIntInclusive(0, 2); //Escolhe uma cor, se a cor já existe, ele não avança pro if
+						if (cor != num) {
+							ehNovo = 1;
+							for (var j = 0; j < arrayPecasExistentes.length; j++) { //Percorre o array de peças tentando encontrar se a combinação já existe
+								tipoTemp = arrayPecasExistentes[j].getAttribute('tipo');
+								corTemp = arrayPecasExistentes[j].getAttribute('cor');
+								tamTemp = arrayPecasExistentes[j].getAttribute('tam');
+								contTemp = arrayPecasExistentes[j].getAttribute('cont');
+								if (tipo == tipoTemp && num == corTemp && tam == tamTemp && cont == contTemp) {
+									ehNovo = 0; //Se cair aqui, é porque a combinação já existe e volta pro começo do while e sorteia uma nova forma
+									break;
+								} else if (j == arrayPecasExistentes.length - 1) {
+									cor = num;
+                                }
+							}
+						}
+						break;
+					case 2:
+						num = (tam == 1 ? 0 : 1); //Escolhe um tam, se o tam já existe, ele não avança pro if
+						if (tam != num) {
+							ehNovo = 1;
+							for (var j = 0; j < arrayPecasExistentes.length; j++) { //Percorre o array de peças tentando encontrar se a combinação já existe
+								tipoTemp = arrayPecasExistentes[j].getAttribute('tipo');
+								corTemp = arrayPecasExistentes[j].getAttribute('cor');
+								tamTemp = arrayPecasExistentes[j].getAttribute('tam');
+								contTemp = arrayPecasExistentes[j].getAttribute('cont');
+								if (tipo == tipoTemp && cor == corTemp && num == tamTemp && cont == contTemp) {
+									ehNovo = 0; //Se cair aqui, é porque a combinação já existe e volta pro começo do while e sorteia uma nova forma
+									break;
+								} else if (j == arrayPecasExistentes.length - 1) {
+									tam = num;
+                                }
+							}
+						}
+						break;
+					case 3:
+						num = (cont == 1 ? 0 : 1); //Escolhe um cont, se o cont já existe, ele não avança pro if
+						if (cont != num) {
+							ehNovo = 1;
+							for (var j = 0; j < arrayPecasExistentes.length; j++) { //Percorre o array de peças tentando encontrar se a combinação já existe
+								tipoTemp = arrayPecasExistentes[j].getAttribute('tipo');
+								corTemp = arrayPecasExistentes[j].getAttribute('cor');
+								tamTemp = arrayPecasExistentes[j].getAttribute('tam');
+								contTemp = arrayPecasExistentes[j].getAttribute('cont');
+								if (tipo == tipoTemp && cor == corTemp && tam == tamTemp && num == contTemp) {
+									ehNovo = 0; //Se cair aqui, é porque a combinação já existe e volta pro começo do while e sorteia uma nova forma
+									break;
+								} else if (j == arrayPecasExistentes.length - 1) {
+									cont = num;
+                                }
+							}
+						}
+						break;
+				}
             }
         }
 	} else {
