@@ -212,10 +212,10 @@ function novaImgBlocoLogico(arrayPecasExistentes) {
 				continue;
 			var ehNovo = 0;
 			while (!ehNovo) {
-				tipo = arrayPecasExistentes.at(-1).getAttribute('tipo'); //Pega o atributo 'tipo' do último elemento dentro do array
-				cor = arrayPecasExistentes.at(-1).getAttribute('cor');
-				tam = arrayPecasExistentes.at(-1).getAttribute('tam');
-				cont = arrayPecasExistentes.at(-1).getAttribute('cont');
+				tipo = parseInt(arrayPecasExistentes.at(-1).getAttribute('tipo')); //Pega o atributo 'tipo' do último elemento dentro do array
+				cor = parseInt(arrayPecasExistentes.at(-1).getAttribute('cor'));
+				tam = parseInt(arrayPecasExistentes.at(-1).getAttribute('tam'));
+				cont = parseInt(arrayPecasExistentes.at(-1).getAttribute('cont'));
 				opcaoVariar = getRandomIntInclusive(0, 3); //Variável que vai escolher qual característica variar...
 				//0: Formas, 1: cores, 2: tamanho, 3: borda
 				switch (opcaoVariar) {
